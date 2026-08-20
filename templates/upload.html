@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Upload Resume - ResumeAI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<nav class="dashboard-nav">
+
+    <a href="/dashboard" class="logo">
+
+        <div class="logo-icon">
+
+            <i class="fa-solid fa-file-circle-check"></i>
+
+        </div>
+
+        <span>ResumeAI</span>
+
+    </a>
+
+    <a href="/dashboard" class="back-home">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Dashboard
+
+    </a>
+
+</nav>
+
+
+<main class="upload-page">
+
+
+    <div class="upload-header">
+
+        <span>RESUME ANALYZER</span>
+
+        <h1>Analyze Your Resume</h1>
+
+        <p>
+
+            Choose a job role and upload your PDF resume.
+
+        </p>
+
+    </div>
+
+
+    <section class="analysis-card">
+
+
+        <form
+            action="/analyze"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+
+            <label class="form-label">
+
+                <i class="fa-solid fa-briefcase"></i>
+
+                Select Job Role
+
+            </label>
+
+
+            <select name="role" class="role-select" required>
+
+                <option value="">
+
+                    Choose your target role
+
+                </option>
+
+                {% for role in roles %}
+
+                <option value="{{ role }}">
+
+                    {{ role }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <label class="form-label">
+
+                <i class="fa-solid fa-file"></i>
+
+                Resume PDF
+
+            </label>
+
+
+            <div class="drop-zone">
+
+                <div class="upload-icon-large">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                </div>
+
+
+                <h3>Upload your resume</h3>
+
+                <p>
+
+                    PDF files only • Maximum 5 MB
+
+                </p>
+
+
+                <label class="browse-button">
+
+                    <i class="fa-solid fa-folder-open"></i>
+
+                    Choose PDF
+
+                    <input
+                        type="file"
+                        name="resume"
+                        accept=".pdf"
+                        hidden
+                        required
+                    >
+
+                </label>
+
+            </div>
+
+
+            <button class="full-button">
+
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                Scan Resume
+
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ResumeAI - AI Resume Analyzer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVBAR
+========================================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+
+            <i class="fa-solid fa-file-circle-check"></i>
+
+        </div>
+
+        <span>ResumeAI</span>
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#features">
+            Features
+        </a>
+
+        <a href="#how">
+            How It Works
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
+    </div>
+
+
+    <div class="nav-right">
+
+        <!-- PROFILE -->
+
+        <div class="profile-icon">
+
+            <i class="fa-solid fa-user"></i>
+
+        </div>
+
+
+        <!-- THREE DOT MENU -->
+
+        <div class="menu-container">
+
+            <button
+                class="menu-button"
+                type="button"
+            >
+
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+
+            </button>
+
+
+            <div class="dropdown-menu">
+
+                <a href="/login">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    Login
+
+                </a>
+
+
+                <a href="/signup">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Sign Up
+
+                </a>
+
+
+                {% if logged_in %}
+
+                <a href="/dashboard">
+
+                    <i class="fa-solid fa-gauge-high"></i>
+
+                    Dashboard
+
+                </a>
+
+
+                <a href="/logout">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+                {% endif %}
+
+
+                <a
+                    href="#"
+                    onclick="openSettings(event)"
+                >
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    Settings
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section
+    class="hero"
+    id="home"
+>
+
+    <div class="hero-content">
+
+
+        <div class="hero-badge">
+
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+            AI Powered Resume Analysis
+
+        </div>
+
+
+        <h1>
+
+            Build a Resume That
+
+            <span>
+                Gets Noticed.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Analyze your resume with AI, check your ATS score,
+            discover missing skills and find out how well
+            your resume matches your dream job.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="/signup"
+                class="primary-button"
+            >
+
+                <i class="fa-solid fa-rocket"></i>
+
+                Analyze My Resume
+
+            </a>
+
+
+            <a
+                href="#how"
+                class="secondary-button"
+            >
+
+                <i class="fa-solid fa-circle-play"></i>
+
+                How It Works
+
+            </a>
+
+        </div>
+
+
+        <div class="hero-stats">
+
+            <div>
+
+                <strong>
+                    15+
+                </strong>
+
+                <span>
+                    Job Roles
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    100%
+                </strong>
+
+                <span>
+                    PDF Based
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    AI
+                </strong>
+
+                <span>
+                    Analysis
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         RESUME PREVIEW
+    ====================================== -->
+
+    <div class="hero-visual">
+
+        <div class="glow"></div>
+
+
+        <div class="resume-preview">
+
+
+            <div class="preview-top">
+
+                <div class="preview-avatar">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="preview-line large"></div>
+
+                    <div class="preview-line small"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="preview-section">
+
+                <div class="preview-heading"></div>
+
+                <div class="preview-lines"></div>
+
+                <div class="preview-lines"></div>
+
+                <div class="preview-lines short"></div>
+
+            </div>
+
+
+
+            <div class="preview-section">
+
+                <div class="preview-heading"></div>
+
+
+                <div class="skill-preview">
+
+                    <span>
+                        HTML
+                    </span>
+
+                    <span>
+                        CSS
+                    </span>
+
+                    <span>
+                        JavaScript
+                    </span>
+
+                    <span>
+                        Python
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="score-card">
+
+                <div>
+
+                    <small>
+                        ATS SCORE
+                    </small>
+
+                    <strong>
+                        92%
+                    </strong>
+
+                </div>
+
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     FEATURES
+========================================= -->
+
+<section
+    class="section"
+    id="features"
+>
+
+    <div class="section-heading">
+
+        <span>
+            FEATURES
+        </span>
+
+
+        <h2>
+            Everything You Need to Improve Your Resume
+        </h2>
+
+
+        <p>
+
+            One simple platform to analyze, improve and
+            optimize your resume.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="feature-grid">
+
+
+        <!-- ATS -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon purple">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+            </div>
+
+
+            <h3>
+                ATS Score
+            </h3>
+
+
+            <p>
+
+                See how compatible your resume is with
+                Applicant Tracking Systems.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- SKILLS -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon blue">
+
+                <i class="fa-solid fa-code"></i>
+
+            </div>
+
+
+            <h3>
+                Skill Detection
+            </h3>
+
+
+            <p>
+
+                Automatically identify technical and
+                professional skills.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- JOB MATCH -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon green">
+
+                <i class="fa-solid fa-bullseye"></i>
+
+            </div>
+
+
+            <h3>
+                Job Matching
+            </h3>
+
+
+            <p>
+
+                Compare your skills against your
+                selected job role.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- SUGGESTIONS -->
+
+        <div class="feature-card">
+
+            <div class="feature-icon orange">
+
+                <i class="fa-solid fa-lightbulb"></i>
+
+            </div>
+
+
+            <h3>
+                Smart Suggestions
+            </h3>
+
+
+            <p>
+
+                Get practical recommendations to
+                improve your resume.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     HOW IT WORKS
+========================================= -->
+
+<section
+    class="how-section"
+    id="how"
+>
+
+    <div class="section-heading">
+
+        <span>
+            HOW IT WORKS
+        </span>
+
+
+        <h2>
+            Analyze Your Resume in 3 Simple Steps
+        </h2>
+
+    </div>
+
+
+
+    <div class="steps">
+
+
+        <!-- STEP 1 -->
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+
+            <i class="fa-solid fa-user-plus"></i>
+
+
+            <h3>
+                Create Account
+            </h3>
+
+
+            <p>
+
+                Sign up and access your personal
+                resume dashboard.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- STEP 2 -->
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+
+            <i class="fa-solid fa-file-arrow-up"></i>
+
+
+            <h3>
+                Upload Resume
+            </h3>
+
+
+            <p>
+
+                Select your target job role and
+                upload your PDF resume.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- STEP 3 -->
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+
+            <i class="fa-solid fa-chart-pie"></i>
+
+
+            <h3>
+                Get Results
+            </h3>
+
+
+            <p>
+
+                Receive ATS score, skills,
+                matching and suggestions.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     ABOUT RESUMEAI
+========================================= -->
+
+<section
+    class="section about-section"
+    id="about"
+>
+
+
+    <div class="section-heading">
+
+
+        <span>
+            ABOUT RESUMEAI
+        </span>
+
+
+        <h2>
+            Your Resume, Analyzed Smarter.
+        </h2>
+
+
+        <p>
+
+            ResumeAI is an AI-powered resume analysis
+            platform designed to help students and job
+            seekers understand how well their resume
+            matches a specific job role.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="about-grid">
+
+
+        <!-- ABOUT CARD -->
+
+        <div class="about-card">
+
+
+            <div class="about-icon">
+
+                <i class="fa-solid fa-file-circle-check"></i>
+
+            </div>
+
+
+            <h3>
+                Smart Resume Analysis
+            </h3>
+
+
+            <p>
+
+                Upload your resume in PDF format and
+                ResumeAI extracts important information
+                such as skills, technologies and keywords
+                from your resume.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- ATS CARD -->
+
+        <div class="about-card">
+
+
+            <div class="about-icon">
+
+                <i class="fa-solid fa-chart-simple"></i>
+
+            </div>
+
+
+            <h3>
+                ATS Score
+            </h3>
+
+
+            <p>
+
+                Get an ATS score that helps you understand
+                how well your resume is structured and
+                optimized for automated recruitment systems.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- JOB MATCH CARD -->
+
+        <div class="about-card">
+
+
+            <div class="about-icon">
+
+                <i class="fa-solid fa-bullseye"></i>
+
+            </div>
+
+
+            <h3>
+                Job Role Matching
+            </h3>
+
+
+            <p>
+
+                Select from 15 different job roles and
+                compare your resume with the skills
+                required for your selected career path.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- SUGGESTIONS CARD -->
+
+        <div class="about-card">
+
+
+            <div class="about-icon">
+
+                <i class="fa-solid fa-lightbulb"></i>
+
+            </div>
+
+
+            <h3>
+                Personalized Suggestions
+            </h3>
+
+
+            <p>
+
+                Discover missing skills and receive
+                practical suggestions that can help
+                improve your resume before applying
+                for jobs.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ABOUT HIGHLIGHT -->
+
+    <div class="about-highlight">
+
+
+        <div class="about-highlight-icon">
+
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Built for Students and Job Seekers
+            </h3>
+
+
+            <p>
+
+                ResumeAI helps you identify weaknesses
+                in your resume and understand what you
+                can improve for your target job role.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     CTA
+========================================= -->
+
+<section class="cta-section">
+
+
+    <div class="cta-card">
+
+
+        <div>
+
+            <span>
+                READY TO IMPROVE?
+            </span>
+
+
+            <h2>
+                Give Your Resume a Smarter Start.
+            </h2>
+
+
+            <p>
+
+                Analyze your resume and discover
+                what you can improve.
+
+            </p>
+
+        </div>
+
+
+        <a
+            href="/signup"
+            class="primary-button"
+        >
+
+            Get Started
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+
+    <div class="footer-logo">
+
+        <i class="fa-solid fa-file-circle-check"></i>
+
+        ResumeAI
+
+    </div>
+
+
+    <p>
+
+        AI-powered resume analysis for students
+        and job seekers.
+
+    </p>
+
+
+    <div class="footer-bottom">
+
+        © 2026 ResumeAI. Built with Flask & Python.
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}"
+></script>
+
+
+
+<!-- =========================================
+     SETTINGS MODAL
+========================================= -->
+
+<div
+    class="settings-overlay"
+    id="settingsOverlay"
+>
+
+
+    <div class="settings-modal">
+
+
+        <!-- SETTINGS HEADER -->
+
+        <div class="settings-header">
+
+
+            <div>
+
+                <span>
+                    SETTINGS
+                </span>
+
+
+                <h2>
+                    App Settings
+                </h2>
+
+            </div>
+
+
+            <button
+                class="settings-close"
+                onclick="closeSettings()"
+                type="button"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+
+        <!-- DARK MODE -->
+
+        <div class="settings-option">
+
+
+            <div class="settings-option-left">
+
+
+                <div class="settings-option-icon">
+
+                    <i class="fa-solid fa-moon"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Dark Mode
+                    </strong>
+
+
+                    <small>
+
+                        Switch between light and
+                        dark appearance
+
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="darkModeToggle"
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+
+        <!-- RESUME FORMAT -->
+
+        <div class="settings-option">
+
+
+            <div class="settings-option-left">
+
+
+                <div class="settings-option-icon">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Resume Format
+                    </strong>
+
+
+                    <small>
+
+                        Currently supported format
+
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <span class="settings-value">
+                PDF
+            </span>
+
+        </div>
+
+
+
+        <!-- LANGUAGE -->
+
+        <div class="settings-option">
+
+
+            <div class="settings-option-left">
+
+
+                <div class="settings-option-icon">
+
+                    <i class="fa-solid fa-language"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Language
+                    </strong>
+
+
+                    <small>
+
+                        Application language
+
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <span class="settings-value">
+                English
+            </span>
+
+        </div>
+
+
+
+        <!-- CLOSE -->
+
+        <div class="settings-footer">
+
+
+            <button
+                class="secondary-button"
+                onclick="closeSettings()"
+                type="button"
+            >
+
+                Close
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+</body>
+
+</html>

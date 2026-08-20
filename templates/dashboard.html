@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - ResumeAI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="dashboard-nav">
+
+    <a href="/" class="logo">
+
+        <div class="logo-icon">
+
+            <i class="fa-solid fa-file-circle-check"></i>
+
+        </div>
+
+        <span>ResumeAI</span>
+
+    </a>
+
+
+    <div class="dashboard-right">
+
+        <span class="welcome-user">
+
+            <i class="fa-solid fa-user"></i>
+
+            {{ user_name }}
+
+        </span>
+
+        <a href="/logout" class="logout-button">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- DASHBOARD -->
+
+<main class="dashboard">
+
+
+    <div class="dashboard-heading">
+
+        <div>
+
+            <span>YOUR DASHBOARD</span>
+
+            <h1>Hello, {{ user_name }} 👋</h1>
+
+            <p>
+
+                Select your target role and upload your resume to begin.
+
+            </p>
+
+        </div>
+
+
+        <a href="/upload" class="primary-button">
+
+            <i class="fa-solid fa-plus"></i>
+
+            New Analysis
+
+        </a>
+
+    </div>
+
+
+
+    <!-- STATS -->
+
+    <div class="dashboard-stats">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon purple">
+
+                <i class="fa-solid fa-file-lines"></i>
+
+            </div>
+
+            <div>
+
+                <span>Recent Analyses</span>
+
+                <strong>{{ analyses|length }}</strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+
+                <i class="fa-solid fa-briefcase"></i>
+
+            </div>
+
+            <div>
+
+                <span>Job Roles</span>
+
+                <strong>15+</strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+            </div>
+
+            <div>
+
+                <span>Supported Format</span>
+
+                <strong>PDF</strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ANALYSIS CARD -->
+
+    <section class="analysis-card">
+
+
+        <div class="analysis-heading">
+
+            <div class="analysis-icon">
+
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+            </div>
+
+            <div>
+
+                <h2>Start Resume Analysis</h2>
+
+                <p>
+
+                    Choose the job you are targeting and upload your resume.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            action="/analyze"
+            method="POST"
+            enctype="multipart/form-data"
+            id="resumeForm"
+        >
+
+
+            <label class="form-label">
+
+                <i class="fa-solid fa-briefcase"></i>
+
+                Target Job Role
+
+            </label>
+
+
+            <select name="role" class="role-select" required>
+
+                <option value="">
+
+                    Select a job role
+
+                </option>
+
+                {% for role in roles %}
+
+                <option value="{{ role }}">
+
+                    {{ role }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <label class="form-label">
+
+                <i class="fa-solid fa-file-arrow-up"></i>
+
+                Upload Resume
+
+            </label>
+
+
+            <div class="drop-zone" id="dropZone">
+
+                <div class="upload-icon-large">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                </div>
+
+
+                <h3>Drag & Drop your resume here</h3>
+
+                <p>
+
+                    or click the button below to browse
+
+                </p>
+
+
+                <label class="browse-button">
+
+                    <i class="fa-solid fa-folder-open"></i>
+
+                    Browse PDF
+
+                    <input
+                        type="file"
+                        name="resume"
+                        id="resumeInput"
+                        accept=".pdf"
+                        hidden
+                        required
+                    >
+
+                </label>
+
+
+                <div id="fileName" class="file-name"></div>
+
+
+                <small>
+
+                    Maximum file size: 5 MB
+
+                </small>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="full-button scan-button"
+                id="scanButton"
+            >
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Analyze Resume
+
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- RECENT ANALYSIS -->
+
+    <section class="history-section">
+
+        <div class="section-title-row">
+
+            <div>
+
+                <span>HISTORY</span>
+
+                <h2>Recent Analyses</h2>
+
+            </div>
+
+        </div>
+
+
+        {% if analyses %}
+
+        <div class="history-table">
+
+            {% for analysis in analyses %}
+
+            <div class="history-row">
+
+                <div class="history-file">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                    <div>
+
+                        <strong>
+                            {{ analysis["resume_name"] }}
+                        </strong>
+
+                        <small>
+                            {{ analysis["created_at"] }}
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <span class="role-badge">
+
+                        {{ analysis["job_role"] }}
+
+                    </span>
+
+                </div>
+
+
+                <div class="history-score">
+
+                    <strong>
+                        {{ analysis["ats_score"] }}%
+                    </strong>
+
+                    <small>ATS</small>
+
+                </div>
+
+
+                <div class="history-score">
+
+                    <strong>
+                        {{ analysis["match_percentage"] }}%
+                    </strong>
+
+                    <small>Match</small>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-history">
+
+            <i class="fa-solid fa-chart-simple"></i>
+
+            <h3>No analyses yet</h3>
+
+            <p>
+
+                Upload your first resume to see your analysis history.
+
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

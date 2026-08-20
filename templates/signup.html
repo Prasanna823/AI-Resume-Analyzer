@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up - ResumeAI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body class="auth-body">
+
+
+<div class="auth-container">
+
+
+    <a href="/" class="auth-logo">
+
+        <i class="fa-solid fa-file-circle-check"></i>
+
+        ResumeAI
+
+    </a>
+
+
+    <div class="auth-card">
+
+        <div class="auth-icon">
+
+            <i class="fa-solid fa-user-plus"></i>
+
+        </div>
+
+
+        <h1>Create Account</h1>
+
+        <p>Start building a stronger resume today.</p>
+
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="alert {{ category }}">
+
+                        {{ message }}
+
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <form method="POST" action="/signup">
+
+
+            <label>Full Name</label>
+
+            <div class="input-group">
+
+                <i class="fa-solid fa-user"></i>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+
+            <label>Email</label>
+
+            <div class="input-group">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <label>Password</label>
+
+            <div class="input-group">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Minimum 6 characters"
+                    required
+                >
+
+            </div>
+
+
+            <label>Confirm Password</label>
+
+            <div class="input-group">
+
+                <i class="fa-solid fa-key"></i>
+
+                <input
+                    type="password"
+                    name="confirm_password"
+                    placeholder="Confirm password"
+                    required
+                >
+
+            </div>
+
+
+            <button class="full-button">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Create Account
+
+            </button>
+
+        </form>
+
+
+        <p class="auth-bottom">
+
+            Already have an account?
+
+            <a href="/login">Login</a>
+
+        </p>
+
+
+        <a href="/" class="back-home">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Home
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>
